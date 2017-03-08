@@ -1,0 +1,30 @@
+{
+  "name": "helen-wechaty",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build && node dist",
+    "build": "babel index.js -d dist",
+    "dev": "babel index.js --watch -d dist"
+  },
+  "keywords": [
+    "wechaty"
+  ],
+  "author": "HelenYin <yinhelen.hlj@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "apiai": "^4.0.0",
+    "babel-polyfill": "^6.23.0",
+    "chalk": "^1.1.3",
+    "chromedriver": "^2.27.3",
+    "qrcode-terminal": "^0.11.0",
+    "random-item-in-array": "^1.0.0",
+    "wechaty": "^0.7.17"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-preset-latest": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0"
+  }
+}
