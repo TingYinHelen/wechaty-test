@@ -67,22 +67,6 @@ bot.on('scan', function (url, code) {
             room = m.room();
             noAtMention = fromContent.replace(/@\w+/ig, '');
             roomTopic = void 0;
-
-            if (!room) {
-              _context3.next = 11;
-              break;
-            }
-
-            roomTopic = room.topic();
-
-            if (!(roomTopic == '美鶴代の伝説' || roomTopic == "Wechaty Developers' Home" || roomTopic == '一起调戏iChat')) {
-              _context3.next = 11;
-              break;
-            }
-
-            return _context3.abrupt('return');
-
-          case 11:
             request = app.textRequest(noAtMention, {
               sessionId: '1234567890'
             });
@@ -100,35 +84,33 @@ bot.on('scan', function (url, code) {
                       case 0:
                         speech = response.result.fulfillment.speech;
 
-                        console.log(speech);
-
                         if (!/大妹最可爱/.test(fromContent)) {
-                          _context2.next = 11;
+                          _context2.next = 10;
                           break;
                         }
 
-                        _context2.next = 5;
+                        _context2.next = 4;
                         return _wechaty.Room.find({ topic: '大妹最可爱' });
 
-                      case 5:
+                      case 4:
                         keyroom = _context2.sent;
 
                         if (!keyroom) {
-                          _context2.next = 11;
+                          _context2.next = 10;
                           break;
                         }
 
-                        _context2.next = 9;
+                        _context2.next = 8;
                         return keyroom.add(fromContact);
 
-                      case 9:
-                        _context2.next = 11;
+                      case 8:
+                        _context2.next = 10;
                         return keyroom.say('\u5927\u59B9\u6700\u7231' + fromContact.name(), fromContact);
 
-                      case 11:
+                      case 10:
                         m.say(speech);
 
-                      case 12:
+                      case 11:
                       case 'end':
                         return _context2.stop();
                     }
@@ -142,7 +124,7 @@ bot.on('scan', function (url, code) {
             }());
             request.end();
 
-          case 15:
+          case 11:
           case 'end':
             return _context3.stop();
         }

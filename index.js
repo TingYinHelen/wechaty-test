@@ -27,12 +27,6 @@ bot.on('scan', (url, code)=>{
   const room = m.room();
   const noAtMention = fromContent.replace(/@\w+/ig, '');
   let roomTopic;
-  if(room){
-    roomTopic = room.topic();
-    if(roomTopic == '美鶴代の伝説' || roomTopic == "Wechaty Developers' Home" || roomTopic == '一起调戏iChat'){
-      return;
-    }
-  }
 
   const request = app.textRequest(noAtMention, {
     sessionId: '1234567890'
@@ -43,7 +37,6 @@ bot.on('scan', (url, code)=>{
   });
   request.on('response', async function(response) {
     const speech = response.result.fulfillment.speech;
-    console.log(speech);
     if(/大妹最可爱/.test(fromContent)){
       let keyroom = await Room.find({topic: '大妹最可爱'});
       if(keyroom){
