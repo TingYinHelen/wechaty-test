@@ -35,6 +35,7 @@ bot.on('scan', (url, code)=>{
   request.on('error', function(error) {
     console.log(error);
   });
+
   request.on('response', async function(response) {
     const speech = response.result.fulfillment.speech;
     if(/大妹最可爱/.test(fromContent)){

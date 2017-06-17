@@ -75,6 +75,7 @@ bot.on('scan', function (url, code) {
             request.on('error', function (error) {
               console.log(error);
             });
+            console.log(fromContent);
             request.on('response', function () {
               var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(response) {
                 var speech, keyroom;
@@ -124,7 +125,7 @@ bot.on('scan', function (url, code) {
             }());
             request.end();
 
-          case 11:
+          case 12:
           case 'end':
             return _context3.stop();
         }
