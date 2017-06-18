@@ -1,9 +1,15 @@
 import 'babel-polyfill'
-import { Wechaty, Room } from 'wechaty'
+import { Wechaty, Room, MediaMessage } from 'wechaty'
 import apiai from 'apiai'
 
-const app = apiai('00f9824dcbcd4c4bb08c02fb6b319343');
+const fs = require('fs')
+
+const file = fs.createReadStream('images/test.png')
+
+
+const app = apiai('46a33e7a9cb741fb96e0dcc3d2d03a6c');
 const bot = Wechaty.instance();
+console.log(bot.sendMedia)
 
 bot.on('scan', (url, code)=>{
   console.log(url);
@@ -14,6 +20,7 @@ bot.on('scan', (url, code)=>{
 .on('friend', async function(contact, request){
   if(request){
     await request.accept();
+    await contact.say('您好，我是 FCC（freeCodeCamp成都社区）的姜姜姜，很高兴认识你*^_^*回复暗号”FCC成都社区”， 加入FCC成都社区群。直接聊天，请随意…')
     console.log(`${contact.name()}请求加为好友，已接受`)
   }
 })
@@ -21,6 +28,7 @@ bot.on('scan', (url, code)=>{
   if(m.self()){
     return;
   }
+
 
   const fromContact = m.from();
   const fromContent = m.content();
@@ -38,14 +46,19 @@ bot.on('scan', (url, code)=>{
 
   request.on('response', async function(response) {
     const speech = response.result.fulfillment.speech;
-    if(/大妹最可爱/.test(fromContent)){
-      let keyroom = await Room.find({topic: '大妹最可爱'});
+    if(/FCC成都社区/.test(fromContent)){
+      let keyroom = await Room.find({topic: 'FreeCodeCamp-成都'});
       if(keyroom){
         await keyroom.add(fromContact);
-        await keyroom.say(`大妹最爱${fromContact.name()}`, fromContact)
+        await keyroom.say(`欢迎${fromContact.name()}FCC(freecodecamp)成都社区*^_^*`, fromContact)
       }
     }
-    m.say(speech);
+    m.type() == 10000 && m.say('@Helen')
+    if(/jiangjiangjiang/.test(speech)){
+      await m.say(new MediaMessage('images/test.jpg'))
+    }else{
+      m.say(speech)
+    }
   })
   request.end();
 })

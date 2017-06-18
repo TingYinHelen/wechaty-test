@@ -20,7 +20,7 @@
     "chromedriver": "^2.27.3",
     "qrcode-terminal": "^0.11.0",
     "random-item-in-array": "^1.0.0",
-    "wechaty": "^0.7.17"
+    "wechaty": "^0.8.110"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",

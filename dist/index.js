@@ -12,8 +12,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-var app = (0, _apiai2.default)('00f9824dcbcd4c4bb08c02fb6b319343');
+var fs = require('fs');
+
+var file = fs.createReadStream('images/test.png');
+
+var app = (0, _apiai2.default)('46a33e7a9cb741fb96e0dcc3d2d03a6c');
 var bot = _wechaty.Wechaty.instance();
+console.log(bot.sendMedia);
 
 bot.on('scan', function (url, code) {
   console.log(url);
@@ -26,7 +31,7 @@ bot.on('scan', function (url, code) {
         switch (_context.prev = _context.next) {
           case 0:
             if (!request) {
-              _context.next = 4;
+              _context.next = 6;
               break;
             }
 
@@ -34,9 +39,13 @@ bot.on('scan', function (url, code) {
             return request.accept();
 
           case 3:
+            _context.next = 5;
+            return contact.say('您好，我是 FCC（freeCodeCamp成都社区）的姜姜姜，很高兴认识你*^_^*回复暗号”FCC成都社区”， 加入FCC成都社区群。直接聊天，请随意…');
+
+          case 5:
             console.log(contact.name() + '\u8BF7\u6C42\u52A0\u4E3A\u597D\u53CB\uFF0C\u5DF2\u63A5\u53D7');
 
-          case 4:
+          case 6:
           case 'end':
             return _context.stop();
         }
@@ -75,7 +84,7 @@ bot.on('scan', function (url, code) {
             request.on('error', function (error) {
               console.log(error);
             });
-            console.log(fromContent);
+
             request.on('response', function () {
               var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(response) {
                 var speech, keyroom;
@@ -85,13 +94,13 @@ bot.on('scan', function (url, code) {
                       case 0:
                         speech = response.result.fulfillment.speech;
 
-                        if (!/大妹最可爱/.test(fromContent)) {
+                        if (!/FCC成都社区/.test(fromContent)) {
                           _context2.next = 10;
                           break;
                         }
 
                         _context2.next = 4;
-                        return _wechaty.Room.find({ topic: '大妹最可爱' });
+                        return _wechaty.Room.find({ topic: 'FreeCodeCamp-成都' });
 
                       case 4:
                         keyroom = _context2.sent;
@@ -106,12 +115,27 @@ bot.on('scan', function (url, code) {
 
                       case 8:
                         _context2.next = 10;
-                        return keyroom.say('\u5927\u59B9\u6700\u7231' + fromContact.name(), fromContact);
+                        return keyroom.say('\u6B22\u8FCE' + fromContact.name() + 'FCC(freecodecamp)\u6210\u90FD\u793E\u533A*^_^*', fromContact);
 
                       case 10:
+                        m.type() == 10000 && m.say('@Helen');
+
+                        if (!/jiangjiangjiang/.test(speech)) {
+                          _context2.next = 16;
+                          break;
+                        }
+
+                        _context2.next = 14;
+                        return m.say(new _wechaty.MediaMessage('images/test.jpg'));
+
+                      case 14:
+                        _context2.next = 17;
+                        break;
+
+                      case 16:
                         m.say(speech);
 
-                      case 11:
+                      case 17:
                       case 'end':
                         return _context2.stop();
                     }
@@ -125,7 +149,7 @@ bot.on('scan', function (url, code) {
             }());
             request.end();
 
-          case 12:
+          case 11:
           case 'end':
             return _context3.stop();
         }
