@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 var app = (0, _apiai2.default)('46a33e7a9cb741fb96e0dcc3d2d03a6c');
-var bot = _wechaty.Wechaty.instance();
+var bot = _wechaty.Wechaty.instance({ profile: '大妹子' });
 
 bot.on('scan', function (url, code) {
   _wechaty.log.info(url);
@@ -77,9 +77,6 @@ bot.on('scan', function (url, code) {
               _wechaty.log.error(error);
             });
 
-            _wechaty.log.info('apptype', m.typeApp());
-            _wechaty.log.info('type', m.type());
-
             request.on('response', function () {
               var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(response) {
                 var speech, keyroom;
@@ -95,7 +92,7 @@ bot.on('scan', function (url, code) {
                         }
 
                         _context2.next = 4;
-                        return _wechaty.Room.find({ topic: 'FreeCodeCamp-成都' });
+                        return _wechaty.Room.find({ topic: '三人行 必有我师' });
 
                       case 4:
                         keyroom = _context2.sent;
@@ -110,32 +107,30 @@ bot.on('scan', function (url, code) {
 
                       case 8:
                         _context2.next = 10;
-                        return keyroom.say('\u6B22\u8FCE' + fromContact.name() + 'FCC(freecodecamp)\u6210\u90FD\u793E\u533A*^_^*', fromContact);
+                        return keyroom.say('\u6B22\u8FCE @' + fromContact.name() + ' \u52A0\u5165FCC(freecodecamp)\u6210\u90FD\u793E\u533A*^_^*');
 
                       case 10:
-                        m.type() == 10000 && m.say('@Helen');
-
-                        if (!(room.rawObj.NickName == '大妹最可爱')) {
-                          _context2.next = 18;
-                          break;
-                        }
-
-                        if (!/jiangjiangjiang/.test(speech)) {
+                        if (!(room && room.rawObj.NickName == '三人行 必有我师')) {
                           _context2.next = 17;
                           break;
                         }
 
-                        _context2.next = 15;
+                        if (!/jiangjiangjiang/.test(speech)) {
+                          _context2.next = 16;
+                          break;
+                        }
+
+                        _context2.next = 14;
                         return m.say(new _wechaty.MediaMessage('images/test.jpg'));
 
-                      case 15:
-                        _context2.next = 18;
+                      case 14:
+                        _context2.next = 17;
                         break;
 
-                      case 17:
+                      case 16:
                         m.say(speech);
 
-                      case 18:
+                      case 17:
                       case 'end':
                         return _context2.stop();
                     }
@@ -149,7 +144,7 @@ bot.on('scan', function (url, code) {
             }());
             request.end();
 
-          case 13:
+          case 11:
           case 'end':
             return _context3.stop();
         }

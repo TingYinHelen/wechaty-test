@@ -3,7 +3,7 @@ import { Wechaty, Room, MediaMessage, log } from 'wechaty'
 import apiai from 'apiai'
 
 const app = apiai('46a33e7a9cb741fb96e0dcc3d2d03a6c');
-const bot = Wechaty.instance();
+const bot = Wechaty.instance({profile: '大妹子'});
 
 bot.on('scan', (url, code)=>{
   log.info(url);
@@ -41,11 +41,11 @@ bot.on('scan', (url, code)=>{
       let keyroom = await Room.find({topic: 'FreeCodeCamp-成都'});
       if(keyroom){
         await keyroom.add(fromContact);
-        await keyroom.say(`欢迎${fromContact.name()}FCC(freecodecamp)成都社区*^_^*`, fromContact)
+        await keyroom.say(`欢迎 @${fromContact.name()} 加入FCC(freecodecamp)成都社区*^_^*`)
       }
     }
-    m.type() == 10000 && m.say('@Helen')
-    if(room.rawObj.NickName == '大妹最可爱'){
+    // m.type() == 10000 && m.say('@Helen')
+    if(room && room.rawObj.NickName == 'FreeCodeCamp-成都'){
       if(/jiangjiangjiang/.test(speech)){
         await m.say(new MediaMessage('images/test.jpg'))
       }else{
