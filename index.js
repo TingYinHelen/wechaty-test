@@ -38,19 +38,23 @@ bot.on('scan', (url, code)=>{
   request.on('response', async function(response) {
     const speech = response.result.fulfillment.speech;
     if(/FCC成都社区/.test(fromContent)){
-      let keyroom = await Room.find({topic: 'FreeCodeCamp-成都'});
+      // let keyroom = await Room.find({topic: 'FreeCodeCamp-成都'});
+      let keyroom = await Room.find({topic: '大妹最可爱'});
       if(keyroom){
         await keyroom.add(fromContact);
         await keyroom.say(`欢迎 @${fromContact.name()} 加入FCC(freecodecamp)成都社区*^_^*`)
       }
     }
-    // m.type() == 10000 && m.say('@Helen')
-    if(room && room.rawObj.NickName == 'FreeCodeCamp-成都'){
+    m.type() == 10000 && m.say('@Helen')
+    if(room && room.rawObj.NickName == '大妹最可爱'){
       if(/jiangjiangjiang/.test(speech)){
-        await m.say(new MediaMessage('images/test.jpg'))
+        //扩展功能
+        m.say('准备进入男友测试。。。。')
       }else{
         m.say(speech)
       }
+    }else if(!room){
+      m.say(speech)
     }
   })
   request.end();

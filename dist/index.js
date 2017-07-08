@@ -92,7 +92,7 @@ bot.on('scan', function (url, code) {
                         }
 
                         _context2.next = 4;
-                        return _wechaty.Room.find({ topic: '三人行 必有我师' });
+                        return _wechaty.Room.find({ topic: '大妹最可爱' });
 
                       case 4:
                         keyroom = _context2.sent;
@@ -110,27 +110,39 @@ bot.on('scan', function (url, code) {
                         return keyroom.say('\u6B22\u8FCE @' + fromContact.name() + ' \u52A0\u5165FCC(freecodecamp)\u6210\u90FD\u793E\u533A*^_^*');
 
                       case 10:
-                        if (!(room && room.rawObj.NickName == '三人行 必有我师')) {
-                          _context2.next = 17;
+                        m.type() == 10000 && m.say('@Helen');
+                        // if(room && room.rawObj.NickName == '三人行 必有我师' && /@大妹子/.test(fromContent)){
+
+                        if (!(room && room.rawObj.NickName == '大妹最可爱')) {
+                          _context2.next = 20;
                           break;
                         }
 
                         if (!/jiangjiangjiang/.test(speech)) {
-                          _context2.next = 16;
+                          _context2.next = 17;
                           break;
                         }
 
-                        _context2.next = 14;
+                        _context2.next = 15;
                         return m.say(new _wechaty.MediaMessage('images/test.jpg'));
 
-                      case 14:
-                        _context2.next = 17;
+                      case 15:
+                        _context2.next = 18;
                         break;
 
-                      case 16:
+                      case 17:
                         m.say(speech);
 
-                      case 17:
+                      case 18:
+                        _context2.next = 21;
+                        break;
+
+                      case 20:
+                        if (!room) {
+                          m.say(speech);
+                        }
+
+                      case 21:
                       case 'end':
                         return _context2.stop();
                     }
