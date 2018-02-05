@@ -55,14 +55,9 @@ bot.on('scan', function (url, code) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            if (!m.self()) {
-              _context3.next = 2;
-              break;
-            }
-
-            return _context3.abrupt('return');
-
-          case 2:
+            // if(m.self()){
+            //   return;
+            // }
             fromContact = m.from();
             fromContent = m.content();
             room = m.room();
@@ -77,7 +72,8 @@ bot.on('scan', function (url, code) {
               _wechaty.log.error(error);
             });
 
-            console.log();
+            // console.log(fromContent)
+
 
             request.on('response', function () {
               var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(response) {
@@ -88,7 +84,7 @@ bot.on('scan', function (url, code) {
                       case 0:
                         speech = response.result.fulfillment.speech;
 
-                        if (!/FCC成都社区/.test(fromContent)) {
+                        if (!/freeCodeCamp成都/.test(fromContent)) {
                           _context2.next = 10;
                           break;
                         }
@@ -112,12 +108,7 @@ bot.on('scan', function (url, code) {
                         return keyroom.say('\u6B22\u8FCE @' + fromContact.name() + ' \u52A0\u5165FCC(freecodecamp)\u6210\u90FD\u793E\u533A*^_^*');
 
                       case 10:
-                        m.type() == 10000 && m.say('@Helen');
-                        // if(room && room.rawObj.NickName == 'FreeCodeCamp-成都'){
-                        //   m.say(speech)
-                        // }else if(!room){
-                        //   m.say(speech)
-                        // }
+                        m.type() == 10000 && m.say('@Helen 抢红包！');
 
                       case 11:
                       case 'end':
@@ -133,7 +124,7 @@ bot.on('scan', function (url, code) {
             }());
             request.end();
 
-          case 12:
+          case 9:
           case 'end':
             return _context3.stop();
         }

@@ -35,7 +35,6 @@ bot.on('scan', (url, code)=>{
     log.error(error);
   });
 
-  console.log(fromContent)
 
 
   request.on('response', async function(response) {
