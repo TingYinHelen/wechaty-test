@@ -77,6 +77,8 @@ bot.on('scan', function (url, code) {
               _wechaty.log.error(error);
             });
 
+            console.log();
+
             request.on('response', function () {
               var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(response) {
                 var speech, keyroom;
@@ -92,7 +94,7 @@ bot.on('scan', function (url, code) {
                         }
 
                         _context2.next = 4;
-                        return _wechaty.Room.find({ topic: '大妹最可爱' });
+                        return _wechaty.Room.find({ topic: 'FreeCodeCamp-成都' });
 
                       case 4:
                         keyroom = _context2.sent;
@@ -111,38 +113,13 @@ bot.on('scan', function (url, code) {
 
                       case 10:
                         m.type() == 10000 && m.say('@Helen');
-                        // if(room && room.rawObj.NickName == '三人行 必有我师' && /@大妹子/.test(fromContent)){
+                        // if(room && room.rawObj.NickName == 'FreeCodeCamp-成都'){
+                        //   m.say(speech)
+                        // }else if(!room){
+                        //   m.say(speech)
+                        // }
 
-                        if (!(room && room.rawObj.NickName == '大妹最可爱')) {
-                          _context2.next = 20;
-                          break;
-                        }
-
-                        if (!/jiangjiangjiang/.test(speech)) {
-                          _context2.next = 17;
-                          break;
-                        }
-
-                        _context2.next = 15;
-                        return m.say(new _wechaty.MediaMessage('images/test.jpg'));
-
-                      case 15:
-                        _context2.next = 18;
-                        break;
-
-                      case 17:
-                        m.say(speech);
-
-                      case 18:
-                        _context2.next = 21;
-                        break;
-
-                      case 20:
-                        if (!room) {
-                          m.say(speech);
-                        }
-
-                      case 21:
+                      case 11:
                       case 'end':
                         return _context2.stop();
                     }
@@ -156,7 +133,7 @@ bot.on('scan', function (url, code) {
             }());
             request.end();
 
-          case 11:
+          case 12:
           case 'end':
             return _context3.stop();
         }
